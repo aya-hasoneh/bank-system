@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../shared_widget/background.dart';
 import '../../shared_widget/button.dart';
+import '../home/home_screen.dart';
 import 'login_bloc.dart';
 import 'widget/card.dart';
 
@@ -59,6 +60,7 @@ class _LoginPageState extends State<LoginPage> {
         height: 420,
         child: Column(
           children: [
+          const  SizedBox(height: 22,),
             Row(
               children: [
                 // Container(width: 100,),
@@ -121,47 +123,71 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
-                children:[ Row(
-                  children: [
-                    Checkbox(
-                      value: bloc.rememberMyId,
-                      onChanged: (value) {
-                        bloc.rememberMyId = value ?? false;
-                        setState(() {
-                          
-                        });
-                      },
-                    ),
-                    const Text(
-                      "Remember my ID for future logins.",
-                      style: TextStyle(color: Color(0xff95989A), fontSize: 14),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Checkbox(
-                      value: bloc.useFingerPrintNextTime,
-                      onChanged: (value) {
-                        bloc.useFingerPrintNextTime = value ?? false;
-                        setState(() {
-                          
-                        });
-                      },
-                    ),
-                    const Text(
-                      "Use fingerprint recognition next time.",
-                      style: TextStyle(color: Color(0xff95989A), fontSize: 14),
-                    ),
-                  ],
-                ),
-                   ],   ),
+                children: [
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: bloc.rememberMyId,
+                        onChanged: (value) {
+                          bloc.rememberMyId = value ?? false;
+                          setState(() {});
+                        },
+                      ),
+                      const Text(
+                        "Remember my ID for future logins.",
+                        style:
+                            TextStyle(color: Color(0xff95989A), fontSize: 14),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: bloc.useFingerPrintNextTime,
+                        onChanged: (value) {
+                          bloc.useFingerPrintNextTime = value ?? false;
+                          setState(() {});
+                        },
+                      ),
+                      const Text(
+                        "Use fingerprint recognition next time.",
+                        style:
+                            TextStyle(color: Color(0xff95989A), fontSize: 14),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-         //   CustomButton(textButton: "Sign in",textColor: Colors.white,buttonBackGroundColor: Colors.blue,onTap: (){},),
+            InkWell(
+              onTap: (){ Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>const  HomePage()),
+                  );},
+              child: Container(
+                
+                height: 40,
+                width: 310,
+                decoration:  BoxDecoration(
+                  borderRadius: BorderRadius.circular(38),
+                    gradient:const LinearGradient(
+                      
+                        colors: [Color(0xff16CFF3), Color(0xff027FAC)])),
+                        
+                        child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                          
+                          children:const [
+                           // Expanded(child: Container()),
+                          SizedBox(width: 50,),
+                          Text("Sign in",style: TextStyle(color: Colors.white,fontSize: 18),),
+                           IconButton(onPressed:null, icon: Icon(Icons.arrow_forward_ios),color: Color(0xffFFFFFF),iconSize: 16,)
+            
+                        ],),
+              ),
+            ),
           ],
         ),
       ),
-      
     );
   }
 }
