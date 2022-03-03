@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 29,
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding:const EdgeInsets.all(20),
               child: myCard(
                 context,
               ),
