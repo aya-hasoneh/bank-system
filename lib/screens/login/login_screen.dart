@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 29,
             ),
             Padding(
-              padding:const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: myCard(
                 context,
               ),
@@ -57,10 +57,12 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(25),
           color: Colors.white,
         ),
-        height: 420,
+        height: 450,
         child: Column(
           children: [
-          const  SizedBox(height: 22,),
+            const SizedBox(
+              height: 22,
+            ),
             Row(
               children: [
                 // Container(width: 100,),
@@ -96,6 +98,10 @@ class _LoginPageState extends State<LoginPage> {
                 controller: bloc.id,
               ),
             ),
+            Text(
+              bloc.errorMsgID,
+              style: const TextStyle(color: Colors.red, fontSize: 13),
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 27, right: 27),
               child: TextField(
@@ -116,7 +122,9 @@ class _LoginPageState extends State<LoginPage> {
                 keyboardType: TextInputType.multiline,
                 controller: bloc.password,
               ),
+              
             ),
+            Text(bloc.errorMsgPassword,style: const TextStyle(color: Colors.red, fontSize: 13),),
             const SizedBox(
               height: 22,
             ),
@@ -160,29 +168,38 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             InkWell(
-              onTap: (){ Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) =>const  HomePage()),
-                  );},
+              onTap: () {
+              bloc.validationID(context);
+              bloc.validatePassword(context);
+                  setState(() {});
+                    },
+              
               child: Container(
-                
                 height: 40,
                 width: 310,
-                decoration:  BoxDecoration(
-                  borderRadius: BorderRadius.circular(38),
-                    gradient:const LinearGradient(
-                      
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(38),
+                    gradient: const LinearGradient(
                         colors: [Color(0xff16CFF3), Color(0xff027FAC)])),
-                        
-                        child: Row(mainAxisAlignment: MainAxisAlignment.center,
-                          
-                          children:const [
-                           // Expanded(child: Container()),
-                          SizedBox(width: 50,),
-                          Text("Sign in",style: TextStyle(color: Colors.white,fontSize: 18),),
-                           IconButton(onPressed:null, icon: Icon(Icons.arrow_forward_ios),color: Color(0xffFFFFFF),iconSize: 16,)
-            
-                        ],),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    // Expanded(child: Container()),
+                    SizedBox(
+                      width: 50,
+                    ),
+                    Text(
+                      "Sign in",
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    IconButton(
+                      onPressed: null,
+                      icon: Icon(Icons.arrow_forward_ios),
+                      color: Color(0xffFFFFFF),
+                      iconSize: 16,
+                    )
+                  ],
+                ),
               ),
             ),
           ],

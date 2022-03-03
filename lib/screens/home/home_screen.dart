@@ -1,13 +1,19 @@
 import 'package:badges/badges.dart';
+import 'package:bank_of_america/screens/wallet/wallet_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../shared_widget/appbar.dart';
 import '../../shared_widget/background.dart';
 import '../../shared_widget/button_all_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -247,8 +253,22 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                  const SizedBox(height: 15,),
-                    ButtonAllPage(titleButton: "View More",colorButton: const[ Color(0xff0078A6),Color(0xff16CFF3)],onTap: (){},),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    ButtonAllPage(
+                      titleButton: "View More",
+                      colorButton: const [Color(0xff0078A6), Color(0xff16CFF3)],
+                      onTap: () {
+                        Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const WalletPage()),
+  );setState(() {
+    
+  });
+  
+                      },
+                    ),
                   ],
                 ),
               ),

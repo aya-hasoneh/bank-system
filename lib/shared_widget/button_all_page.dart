@@ -9,8 +9,9 @@ class ButtonAllPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){},
+      onTap: onTap,
       child: Container(
+        
         height: 40,
         width: 310,
         decoration: BoxDecoration(
@@ -19,7 +20,7 @@ class ButtonAllPage extends StatelessWidget {
         child: Center(
             child: Text(
           titleButton,
-          style: TextStyle(color: Colors.white, fontSize: 15),
+          style:const TextStyle(color: Colors.white, fontSize: 15),
         )),
       ),
     );
