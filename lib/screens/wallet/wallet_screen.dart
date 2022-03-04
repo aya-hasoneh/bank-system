@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:bank_of_america/screens/wallet/wallet_creditcard.dart';
+import 'package:bank_of_america/screens/wallet/wallet_saving.dart';
 import 'package:bank_of_america/shared_widget/appbar.dart';
 import 'package:bank_of_america/shared_widget/background.dart';
 import 'package:bank_of_america/utils/singelton.dart';
@@ -45,7 +47,7 @@ class _WalletPageState extends State<WalletPage>
                   labelColor: Colors.white,
                   indicatorSize: TabBarIndicatorSize.label,
                   indicatorColor: Colors.white,
-                  labelStyle: TextStyle(fontSize: 20),
+                  labelStyle: const TextStyle(fontSize: 20),
                   labelPadding: const EdgeInsets.only(
                     left: 60,
                     right: 60,
@@ -63,19 +65,11 @@ class _WalletPageState extends State<WalletPage>
                   ]),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 300),
-            child: Container(
-              height: 300,
-              width: double.maxFinite,
-              child: TabBarView(controller: tabController, children:  [
-                
-                Container(height: 100,width: 100,color: Colors.pink,),
-                 Container(height: 100,width: 100,color: Colors.purple,),
-               
-              ]),
-            ),
-          ),
+          TabBarView(controller: tabController, children:const  [
+            WalletCreditCard(),
+          WalletSaving(),
+           
+          ]),
         ],
       ),
     );
