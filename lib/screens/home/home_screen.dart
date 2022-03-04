@@ -1,5 +1,7 @@
 import 'package:badges/badges.dart';
-import 'package:bank_of_america/screens/wallet/wallet_screen.dart';
+import 'package:bank_of_america/screens/models/mymodels.dart';
+import 'package:bank_of_america/screens/utils/singelton.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../shared_widget/appbar.dart';
@@ -7,8 +9,6 @@ import '../../shared_widget/background.dart';
 import '../../shared_widget/button_all_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -40,16 +40,16 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(30)),
-                          child: Column(children: const [
-                            SizedBox(
+                          child: Column(children: [
+                            const SizedBox(
                               height: 50,
                             ),
                             Text(
-                              "Hello John Doe!",
-                              style: TextStyle(
+                              Singelton.prefrence.info.name,
+                              style: const TextStyle(
                                   fontSize: 25, color: Color(0xff777879)),
                             ),
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.only(top: 3),
                               child: Text(
                                 "Last Login: 10:33 AM, 28.09.2017",
@@ -126,9 +126,10 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(
                           width: 14,
                         ),
-                        const Text(
-                          "\$ 6,328.33",
-                          style: TextStyle(color: Colors.white, fontSize: 28),
+                        Text(
+                          "JD " + Singelton.prefrence.info.balance,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 28),
                         ),
                       ],
                     )
@@ -257,18 +258,12 @@ class _HomePageState extends State<HomePage> {
                       height: 15,
                     ),
                     ButtonAllPage(
-                      titleButton: "View More",
-                      colorButton: const [Color(0xff0078A6), Color(0xff16CFF3)],
-                      onTap: () {
-                        Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const WalletPage()),
-  );setState(() {
-    
-  });
-  
-                      },
-                    ),
+                        titleButton: "View More",
+                        colorButton: const [
+                          Color(0xff0078A6),
+                          Color(0xff16CFF3)
+                        ],
+                        onTap: () {}),
                   ],
                 ),
               ),
