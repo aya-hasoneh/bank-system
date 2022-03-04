@@ -1,12 +1,14 @@
 import 'package:badges/badges.dart';
-import 'package:bank_of_america/screens/models/mymodels.dart';
-import 'package:bank_of_america/screens/utils/singelton.dart';
+
+
 
 import 'package:flutter/material.dart';
 
 import '../../shared_widget/appbar.dart';
 import '../../shared_widget/background.dart';
 import '../../shared_widget/button_all_page.dart';
+import '../../utils/singelton.dart';
+import '../wallet/wallet_screen.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -263,7 +265,10 @@ class _HomePageState extends State<HomePage> {
                           Color(0xff0078A6),
                           Color(0xff16CFF3)
                         ],
-                        onTap: () {}),
+                        onTap: () { Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) =>  WalletPage()),
+  );}),
                   ],
                 ),
               ),

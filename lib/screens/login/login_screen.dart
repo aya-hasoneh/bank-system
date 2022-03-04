@@ -4,7 +4,7 @@ import '../../shared_widget/background.dart';
 import '../../shared_widget/button.dart';
 import '../home/home_screen.dart';
 import 'login_bloc.dart';
-import 'widget/card.dart';
+
 
 class LoginPage extends StatefulWidget {
   @override

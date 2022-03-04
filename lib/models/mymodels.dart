@@ -5,3 +5,7 @@ class UserInformation {
  
   UserInformation({required this.name,required this.balance});
 }
+class TabBarINWalletScreen {
+  String name;
+  TabBarINWalletScreen ({required this.name});
+}
