@@ -56,16 +56,17 @@ class _WalletPageState extends State<WalletPage>
                   unselectedLabelColor: Colors.white,
                   controller: tabController,
                   tabs: const [
-                    Tab(
-                      text: "Credit Card",
-                    ),
-                    Tab(
-                      text: "Saving",
-                    ),
+
+                     Tab(
+                       text: "Credit Card",
+                     ),
+                     Tab(
+                       text: "Saving",
+                     ),
                   ]),
             ),
           ),
-          TabBarView(controller: tabController, children:const  [
+          TabBarView(controller: tabController, children:  [
             WalletCreditCard(),
           WalletSaving(),
            
