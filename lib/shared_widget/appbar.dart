@@ -24,6 +24,3 @@ class AppBarForAllPage extends StatelessWidget {
     );
   }
 }
-
-
- 

@@ -7,11 +7,7 @@ class Singelton {
 
   UserInformation info = UserInformation(name: "Aya ", balance: "10000");
 
- List <TabBarINWalletScreen> tab =[
-   TabBarINWalletScreen(name: "CREDIT CARD"),
-   TabBarINWalletScreen(name: "SAVING"), 
-   
- ];
+ Validated valid =Validated(validation: true);
 
   
 }

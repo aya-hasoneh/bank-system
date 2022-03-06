@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 import '../../shared_widget/background.dart';
-import '../../shared_widget/button.dart';
+
 import '../home/home_screen.dart';
 import 'login_bloc.dart';
-
 
 class LoginPage extends StatefulWidget {
   @override
@@ -13,6 +13,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   var bloc = LoginBloc();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  String name = "";
 
   @override
   Widget build(BuildContext context) {
@@ -83,48 +85,65 @@ class _LoginPageState extends State<LoginPage> {
                 )
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 27, right: 27),
-              child: TextField(
-                decoration: const InputDecoration(
-                    label: Text(
-                      "PRO ID",
-                      style: TextStyle(color: Color(0xff707273), fontSize: 16),
+            Form(
+                // autovalidateMode:Singelton.prefrence.valid.validation,
+                key: formKey,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 27, right: 27),
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                            label: Text(
+                              "PRO ID",
+                              style: TextStyle(
+                                  color: Color(0xff707273), fontSize: 16),
+                            ),
+                            hintText: "Enter your bank ID",
+                            hintStyle: TextStyle(
+                                color: Color(0xffAEB1B3), fontSize: 13)),
+                        keyboardType: TextInputType.number,
+                        // controller: bloc.id,
+                        validator: (value) {
+                          if (value!.isEmpty || value.length <7) {
+                            return "Please Enter Your Correct Name";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
                     ),
-                    hintText: "Enter your bank ID",
-                    hintStyle:
-                        TextStyle(color: Color(0xffAEB1B3), fontSize: 13)),
-                keyboardType: TextInputType.number,
-                controller: bloc.id,
-              ),
-            ),
-            Text(
-              bloc.errorMsgID,
-              style: const TextStyle(color: Colors.red, fontSize: 13),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 27, right: 27),
-              child: TextField(
-                obscureText: true,
-                obscuringCharacter: '•',
-                decoration: const InputDecoration(
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
-                    label: Text(
-                      "PASSWORD",
-                      style: TextStyle(color: Color(0xff707273), fontSize: 16),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 27, right: 27),
+                      child: TextFormField(
+                        obscureText: true,
+                        obscuringCharacter: '•',
+                        decoration: const InputDecoration(
+                            border: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey)),
+                            label: Text(
+                              "PASSWORD",
+                              style: TextStyle(
+                                  color: Color(0xff707273), fontSize: 16),
+                            ),
+                            hintText: "......",
+                            hintStyle: TextStyle(
+                                color: Color(0xffAEB1B3),
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold)),
+                        keyboardType: TextInputType.multiline,
+                        // controller: bloc.password,
+                        validator: (value){
+                          if(value!.isEmpty){
+                            return "Please Enter Your Password ";
+                          }else{
+                            return null;
+                          }
+                        },
+                      ),
                     ),
-                    hintText: "......",
-                    hintStyle: TextStyle(
-                        color: Color(0xffAEB1B3),
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold)),
-                keyboardType: TextInputType.multiline,
-                controller: bloc.password,
-              ),
-              
-            ),
-            Text(bloc.errorMsgPassword,style: const TextStyle(color: Colors.red, fontSize: 13),),
+                  ],
+                )),
             const SizedBox(
               height: 22,
             ),
@@ -169,11 +188,15 @@ class _LoginPageState extends State<LoginPage> {
             ),
             InkWell(
               onTap: () {
-              bloc.validationID(context);
-              bloc.validatePassword(context);
-                  setState(() {});
-                    },
-              
+                if (formKey.currentState!.validate()) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
+                }
+
+                setState(() {});
+              },
               child: Container(
                 height: 40,
                 width: 310,

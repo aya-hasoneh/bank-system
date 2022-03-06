@@ -39,6 +39,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   
   flutter_custom_tab_bar: ^1.1.9
+  form_field_validator: ^1.1.0
   
 
 dev_dependencies:
