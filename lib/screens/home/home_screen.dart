@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
           Column(
             children: [
               SafeArea(
-                child: AppBarForAllPage(titleAppBar: 'DASHBOARD', ),
+                child: AppBarForAllPage(titleAppBar: 'DASHBOARD',showBackButton: false,),
               ),
               Column(
                 children: [

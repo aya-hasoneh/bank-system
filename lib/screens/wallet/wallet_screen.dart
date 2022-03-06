@@ -36,9 +36,16 @@ class _WalletPageState extends State<WalletPage>
       body: Stack(
         children: [
           BackgroundImage(),
-          Padding(
-            padding: const EdgeInsets.only(top: 35),
-            child: AppBarForAllPage(titleAppBar: "WALLET"),
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 31,left: 30),
+                child: AppBarForAllPage(
+                  titleAppBar: "WALLET",
+                  showBackButton: false,
+                ),
+              ),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.only(top: 140),
@@ -56,20 +63,18 @@ class _WalletPageState extends State<WalletPage>
                   unselectedLabelColor: Colors.white,
                   controller: tabController,
                   tabs: const [
-
-                     Tab(
-                       text: "Credit Card",
-                     ),
-                     Tab(
-                       text: "Saving",
-                     ),
+                    Tab(
+                      text: "Credit Card",
+                    ),
+                    Tab(
+                      text: "Saving",
+                    ),
                   ]),
             ),
           ),
-          TabBarView(controller: tabController, children:  [
+          TabBarView(controller: tabController, children: [
             WalletCreditCard(),
-          WalletSaving(),
-           
+            WalletSaving(),
           ]),
         ],
       ),

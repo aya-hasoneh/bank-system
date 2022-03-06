@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../shared_widget/button_all_page.dart';
+import '../view_transication/view_transication_screen.dart';
 
 class WalletCreditCard extends StatelessWidget {
- var walletBloc =WalletBloc();
- 
+  var walletBloc = WalletBloc();
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -59,7 +60,7 @@ class WalletCreditCard extends StatelessWidget {
                   height: 190,
                   width: 450,
                   child: PageView.builder(
-                      controller:walletBloc. pageController,
+                      controller: walletBloc.pageController,
                       onPageChanged: (index) {},
                       itemCount: 3,
                       itemBuilder: (context, index) {
@@ -67,7 +68,7 @@ class WalletCreditCard extends StatelessWidget {
                       }),
                 ),
                 SmoothPageIndicator(
-                  controller: walletBloc. pageController,
+                  controller: walletBloc.pageController,
                   count: 3,
                   effect: const JumpingDotEffect(
                     dotHeight: 10,
@@ -108,23 +109,33 @@ class WalletCreditCard extends StatelessWidget {
                   ),
                 ],
               ),
-
-              
             ),
-          //  Padding(
-          //    padding: const EdgeInsets.only(top: 19,left: 25),
-          //    child: Row(children: [Image.asset("assets/zara.png",width: 30,),
-          //   const SizedBox(width: 10,),
-          //   const Text("29 Sep. 17",style: TextStyle(fontSize: 15,color: Colors.grey),),
-          //    const SizedBox(width: 15,),
-          //  const Text("ZARA Mall Sof...",style: TextStyle(fontSize: 15,color: Colors.grey),),
-          //   const SizedBox(width: 20,),
-          //  const Text("\$ 49.99",style: TextStyle(fontSize: 15,color: Colors.grey),),
-          //    ],),
-          //  )
+            //  Padding(
+            //    padding: const EdgeInsets.only(top: 19,left: 25),
+            //    child: Row(children: [Image.asset("assets/zara.png",width: 30,),
+            //   const SizedBox(width: 10,),
+            //   const Text("29 Sep. 17",style: TextStyle(fontSize: 15,color: Colors.grey),),
+            //    const SizedBox(width: 15,),
+            //  const Text("ZARA Mall Sof...",style: TextStyle(fontSize: 15,color: Colors.grey),),
+            //   const SizedBox(width: 20,),
+            //  const Text("\$ 49.99",style: TextStyle(fontSize: 15,color: Colors.grey),),
+            //    ],),
+            //  )
             Expanded(child: Container()),
-          ButtonAllPage(titleButton :"View Transactions",colorButton:const [Color(0xff16CFF3),Color(0xff0078A6)],onTap: (){},),
-         const SizedBox(height: 10,),
+            ButtonAllPage(
+              titleButton: "View Transactions",
+              colorButton: const [Color(0xff16CFF3), Color(0xff0078A6)],
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ViewTransicationPage()),
+                );
+              },
+            ),
+            const SizedBox(
+              height: 10,
+            ),
           ]),
         ),
       )
@@ -179,7 +190,4 @@ class WalletCreditCard extends StatelessWidget {
       ),
     );
   }
-
-  
-   
 }

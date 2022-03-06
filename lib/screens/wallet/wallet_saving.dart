@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../shared_widget/button_all_page.dart';
 import '../../utils/singelton.dart';
+import '../view_transication/view_transication_screen.dart';
 
 class WalletSaving extends StatelessWidget {
   const WalletSaving({Key? key}) : super(key: key);
@@ -64,68 +65,81 @@ class WalletSaving extends StatelessWidget {
                         end: Alignment.bottomCenter,
                         colors: [Color(0xffFFFFFF), Color(0xffD9D9D9)]),
                   ),
-                  child: Column(children:  [
-                    const SizedBox(height: 20,),
-                  const  Text(
+                  child: Column(children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
                       "Saving Account",
                       style: TextStyle(fontSize: 18, color: Color(0xffAEB1B3)),
                     ),
-                   const  SizedBox(height: 20,),
-                   const Text("335-5437543-3-40-3",style: TextStyle(color: Color(0xff95989A),fontSize: 18),),
-                   Expanded(child: Container()),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 10,bottom: 10),
-                      child: Container(alignment: Alignment.bottomRight,
-                        
-                        child: Image.asset("assets/logoincard.png")),
+                    const SizedBox(
+                      height: 20,
                     ),
-                     
+                    const Text(
+                      "335-5437543-3-40-3",
+                      style: TextStyle(color: Color(0xff95989A), fontSize: 18),
+                    ),
+                    Expanded(child: Container()),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10, bottom: 10),
+                      child: Container(
+                          alignment: Alignment.bottomRight,
+                          child: Image.asset("assets/logoincard.png")),
+                    ),
                   ]),
-                  
-                  
                 ),
               ),
             ],
           ),
-
         ),
         Padding(
-        padding: const EdgeInsets.only(top: 16, left: 25, right: 25),
-        child: Container(
-          height: 305,
-          width: 460,
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-              color: Colors.white),
-          child: Column(children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20, left: 80),
-              child: Row(
-                children: [
-                  Image.asset(
-                    "assets/clock.png",
-                    scale: 0.7,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  const Text(
-                    "History of Transactions",
-                    style: TextStyle(fontSize: 18, color: Color(0xff707273)),
-                  ),
-                ],
+          padding: const EdgeInsets.only(top: 16, left: 25, right: 25),
+          child: Container(
+            height: 305,
+            width: 460,
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20)),
+                color: Colors.white),
+            child: Column(children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 20, left: 80),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/clock.png",
+                      scale: 0.7,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    const Text(
+                      "History of Transactions",
+                      style: TextStyle(fontSize: 18, color: Color(0xff707273)),
+                    ),
+                  ],
+                ),
               ),
-
-              
-            ),
-          
-            Expanded(child: Container()),
-          ButtonAllPage(titleButton :"View Transactions",colorButton:const [Color(0xff16CFF3),Color(0xff0078A6)],onTap: (){},),
-         const SizedBox(height: 10,),
-          ]),
-        ),
-      )
+              Expanded(child: Container()),
+              ButtonAllPage(
+                titleButton: "View Transactions",
+                colorButton: const [Color(0xff16CFF3), Color(0xff0078A6)],
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ViewTransicationPage()),
+                  );
+                },
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+            ]),
+          ),
+        )
       ],
     );
   }
