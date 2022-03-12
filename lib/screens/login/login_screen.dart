@@ -1,8 +1,9 @@
+import 'dart:async';
+
+import 'package:bank_of_america/screens/login/login_finger_print_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 
 import '../../shared_widget/background.dart';
-
 import '../home/home_screen.dart';
 import 'login_bloc.dart';
 
@@ -11,37 +12,71 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
   var bloc = LoginBloc();
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  String name = "";
+
+  @override
+  void initState() {
+    bloc.readRemeberMyID().then((value) {
+      bloc.rememberMyId = value != "" ? true : false;
+      bloc.id.text = value;
+        bloc.password.text = value;
+      setState(() {});
+    });
+    // bloc.readRemeberMyID().then((value) {
+    //   bloc.rememberMyId = value != "" ? true : false;
+    //   bloc.password.text = value;
+    //   setState(() {});
+    // });
+    bloc.readUseFingerPrint().then((value) {
+      bloc.useFingerPrintNextTime = value != "" ? true : false;
+      Timer(
+        Duration(seconds: 0),
+        ()
+     { Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => bloc.useFingerPrintNextTime == true
+                ? LoginWithFingerPrint()
+                : LoginPage()),
+        ); });
+        setState(() {
+          
+        });
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       body: Stack(children: [
         BackgroundImage(),
-        SafeArea(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            Container(
-              height: 100,
-              child: Image.asset(
-                "assets/logo_appbar.png",
-                scale: 0.8,
-              ),
-            ),
-            const SizedBox(
-              height: 29,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: myCard(
-                context,
-              ),
-            ),
-          ]),
+        SingleChildScrollView(
+          child: SafeArea(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 100,
+                    child: Image.asset(
+                      "assets/logo_appbar.png",
+                      scale: 0.8,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 29,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: myCard(
+                      context,
+                    ),
+                  ),
+                ]),
+          ),
         )
       ]),
     );
@@ -86,8 +121,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             Form(
-                // autovalidateMode:Singelton.prefrence.valid.validation,
-                key: formKey,
+                key: bloc.formKey,
                 child: Column(
                   children: [
                     Padding(
@@ -103,10 +137,10 @@ class _LoginPageState extends State<LoginPage> {
                             hintStyle: TextStyle(
                                 color: Color(0xffAEB1B3), fontSize: 13)),
                         keyboardType: TextInputType.number,
-                        // controller: bloc.id,
+                        controller: bloc.id,
                         validator: (value) {
-                          if (value!.isEmpty || value.length <7) {
-                            return "Please Enter Your Correct Name";
+                          if (value!.isEmpty || value.length < 7) {
+                            return "The ID Number At Least 7 Number";
                           } else {
                             return null;
                           }
@@ -132,11 +166,11 @@ class _LoginPageState extends State<LoginPage> {
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold)),
                         keyboardType: TextInputType.multiline,
-                        // controller: bloc.password,
-                        validator: (value){
-                          if(value!.isEmpty){
+                        controller: bloc.password,
+                        validator: (value) {
+                          if (value!.isEmpty) {
                             return "Please Enter Your Password ";
-                          }else{
+                          } else {
                             return null;
                           }
                         },
@@ -157,6 +191,12 @@ class _LoginPageState extends State<LoginPage> {
                         value: bloc.rememberMyId,
                         onChanged: (value) {
                           bloc.rememberMyId = value ?? false;
+
+                          bloc.saveRemeberMyID(
+                              bloc.rememberMyId ? bloc.id.text : "");
+                          bloc.saveRemeberMyID(
+                              bloc.rememberMyId ? bloc.password.text : "");
+
                           setState(() {});
                         },
                       ),
@@ -173,6 +213,9 @@ class _LoginPageState extends State<LoginPage> {
                         value: bloc.useFingerPrintNextTime,
                         onChanged: (value) {
                           bloc.useFingerPrintNextTime = value ?? false;
+                          bloc.saveUseFingerPrint(
+                              bloc.useFingerPrintNextTime ? "false" : "true");
+
                           setState(() {});
                         },
                       ),
@@ -188,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             InkWell(
               onTap: () {
-                if (formKey.currentState!.validate()) {
+                if (bloc.formKey.currentState!.validate()) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => HomePage()),

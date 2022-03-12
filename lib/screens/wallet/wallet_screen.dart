@@ -1,12 +1,12 @@
-import 'dart:math';
 
-import 'package:bank_of_america/screens/wallet/wallet_creditcard.dart';
-import 'package:bank_of_america/screens/wallet/wallet_saving.dart';
+
+import 'package:bank_of_america/shared_widget/wallet_creditcard.dart';
+import 'package:bank_of_america/shared_widget/wallet_saving.dart';
 import 'package:bank_of_america/shared_widget/appbar.dart';
 import 'package:bank_of_america/shared_widget/background.dart';
-import 'package:bank_of_america/utils/singelton.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_tab_bar/library.dart';
+
 
 class WalletPage extends StatefulWidget {
   const WalletPage({Key? key}) : super(key: key);
@@ -36,16 +36,12 @@ class _WalletPageState extends State<WalletPage>
       body: Stack(
         children: [
           BackgroundImage(),
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 31,left: 30),
-                child: AppBarForAllPage(
-                  titleAppBar: "WALLET",
-                  showBackButton: false,
-                ),
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(top: 31,left: 30),
+            child: AppBarForAllPage(
+              titleAppBar: "WALLET",
+              
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 140),

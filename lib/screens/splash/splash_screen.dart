@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../shared_widget/background.dart';
 import '../login/login_screen.dart';
-import '../login_with_finger_print/login_finger_print_screen.dart';
+import '../login/login_finger_print_screen.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -41,7 +41,7 @@ class SplashPage extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const LoginWithFingerPrint()),
+                    MaterialPageRoute(builder: (context) =>  LoginWithFingerPrint()),
                   );
                 },
               ),

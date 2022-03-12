@@ -1,12 +1,14 @@
 import 'package:bank_of_america/screens/home/home_screen.dart';
+import 'package:bank_of_america/screens/login/login_bloc.dart';
+import 'package:bank_of_america/screens/login/login_screen.dart';
 import 'package:bank_of_america/shared_widget/background.dart';
 import 'package:flutter/material.dart';
 
 import '../../shared_widget/button_all_page.dart';
 
 class LoginWithFingerPrint extends StatelessWidget {
-  const LoginWithFingerPrint({Key? key}) : super(key: key);
-
+  
+  var bloc = LoginBloc();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +30,12 @@ class LoginWithFingerPrint extends StatelessWidget {
                 const SizedBox(
                   height: 35,
                 ),
-                Image.asset("assets/fingerprint.png"),
+                InkWell(
+                  onTap: (){ Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );},
+                  child: Image.asset("assets/fingerprint.png")),
                 Expanded(
                   child: Container(),
                 ),
@@ -41,7 +48,7 @@ class LoginWithFingerPrint extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
+                        MaterialPageRoute(builder: (context) => LoginPage()),
                       );
                     }),
                    const SizedBox(height: 30,),
